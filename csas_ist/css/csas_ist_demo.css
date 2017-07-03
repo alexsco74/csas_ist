@@ -1,0 +1,59 @@
+/* ---- grid ---- */
+.csas-ist-demo.csas-ist-grid {
+    background: #DDD;
+    max-width: 1200px;
+}
+
+/* ---- .grid-item ---- */
+.csas-ist-demo .csas-ist-item {
+    float: left;
+    width: 100px;
+    height: 100px; /*may be replace on min-height:1em % */
+    background: #0D8;
+    border: 2px solid #333;
+    border-color: hsla(0, 0%, 0%, 0.7);
+}
+
+.csas-ist-demo .csas-ist-item--width2 {
+    width: 200px;
+}
+
+.csas-ist-demo .csas-ist-item--height2 {
+    height: 200px;
+}
+
+/* demo packery */
+.csas-ist-demo-pac .csas-ist-item {
+    width: 100px;
+    height: 100px;
+}
+
+.csas-ist-demo-pac .csas-ist-item--width2 {
+    width: 200px;
+}
+
+.csas-ist-demo-pac .csas-ist-item--height2 {
+    height: 200px;
+}
+
+/* 5 columns, percentage width */
+.csas-ist-mns-fld .csas-ist-item,
+.csas-ist-mns-fld .csas-ist-sizer {
+    width: 20%;
+}
+
+.csas-ist-mns-fld .csas-ist-item {
+    float: left;
+    height: 100px;
+    background: #0D8;
+    border: 2px solid #333;
+    border-color: hsla(0, 0%, 0%, 0.7);
+}
+
+.csas-ist-mns-fld .csas-ist-item--width2 {
+    width: 40%;
+}
+
+.csas-ist-mns-fld .csas-ist-item--height2 {
+    height: 200px;
+}

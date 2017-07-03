@@ -1,0 +1,85 @@
+<?php
+/**
+ * Implements hook_library().
+ * for use
+ * $element['#attached']['library'][] = array('csas_ist', 'csas_ist');
+ * drupal_add_library('csas_ist', 'csas_ist');
+ */
+function csas_ist_library() {
+  $m_path = drupal_get_path('module', 'csas_ist');
+  $name = 'isotope';
+  $library_path = _csas_ist_get_lib_pat($name);
+  if($library_path) {
+    $libraries['csas_ist'] = array(
+      'title' => 'Isotope',
+      'version' => '3.0.1',
+      'description' => 'https://github.com/metafizzy/isotope',
+      'js' => array(
+        $library_path . '/imagesloaded.pkgd.min.js' => array(),
+        $library_path . '/'.$name.'.pkgd.min.js' => array(),
+        $m_path . '/js/csas_ist.js' => array(),
+      ),
+      'css' => array(
+        $m_path . '/css/csas_ist.css' => array(),
+      )
+    );
+  }
+  $name = 'packery';
+  $library_path = _csas_ist_get_lib_pat($name);
+  if($library_path) {
+    $libraries['csas_ist_packery_mode'] = array(
+      'title' => 'Packery layout mode',
+      'version' => '2.0.0',
+      'description' => 'https://github.com/metafizzy/packery',
+      'js' => array(
+        $library_path . '/'.$name.'-mode.pkgd.min.js' => array(),
+      ),
+    );
+  }
+
+  return $libraries;
+}
+
+/**
+ * Get the location of the library.
+ *
+ * @return
+ *   The location of the library, or FALSE if the library isn't installed.
+ */
+function _csas_ist_get_lib_pat($name = 'isotope') {
+  if (function_exists('libraries_get_path')) {
+    return libraries_get_path($name);
+  }
+
+  // The following logic is taken from libraries_get_libraries()
+  $searchdir = array();
+
+  // Similar to 'modules' and 'themes' directories inside an installation
+  // profile, installation profiles may want to place libraries into a
+  // 'libraries' directory.
+  $searchdir[] = 'profiles/' . drupal_get_profile() . '/libraries';
+
+  // Always search sites/all/libraries.
+  $searchdir[] = 'sites/all/libraries';
+
+  // Also search sites/<domain>/*.
+  $searchdir[] = conf_path() . '/libraries';
+
+  foreach ($searchdir as $dir) {
+    if (file_exists($dir . '/'.$name.'/'.$name.'.pkgd.min.js')) {
+      return $dir . '/' . $name;
+    }
+  }
+  return FALSE;
+}
+
+function csas_ist_menu(){
+  $items['csas-ist-example'] = array(
+    'title' => 'Csas isotope example',
+    'page callback' => 'csas_ist_pages_example',
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_CALLBACK,
+    'file' => 'csas_ist.pages.inc',
+  );
+  return $items;
+}
